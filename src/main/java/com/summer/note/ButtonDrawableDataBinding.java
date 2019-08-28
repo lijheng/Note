@@ -30,10 +30,6 @@ public class ButtonDrawableDataBinding {
     public static void setBorderDrawable(View view, int borderColor, int backgroundColor) {
         StateListDrawable stateListDrawable = new StateListDrawable();
         ShapeDrawable pressedDrawable = new ShapeDrawable();
-        RectShape rectShape = new RectShape();
-//        pressedDrawable.setShape(new RectShape());
-//        pressedDrawable.set
-
 //        stateListDrawable.addState(new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled}, );
 //        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, );
     }
