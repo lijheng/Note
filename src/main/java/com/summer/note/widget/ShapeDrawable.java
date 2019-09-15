@@ -2,7 +2,10 @@ package com.summer.note.widget;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.shapes.Shape;
 import android.widget.LinearLayout;
@@ -29,11 +32,14 @@ public class ShapeDrawable extends Drawable {
     private int stokeColor, solidColor;//边框颜色和填充颜色
     private int strokeWidth;//边框宽度
     private int topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius;//矩形的圆角
-    private int width, height;//drawable的宽高
+    private Rect mRect;
+    private RectF mRectF;
+
+    private Paint mPaint;
 
     private ShapeDrawable(Shape shape, int stokeColor, int solidColor, int strokeWidth,
                           int topLeftRadius, int topRightRadius, int bottomLeftRadius,
-                          int bottomRightRadius, int width, int height, int style) {
+                          int bottomRightRadius, int style) {
         this.shape = shape;
         this.stokeColor = stokeColor;
         this.solidColor = solidColor;
@@ -42,9 +48,9 @@ public class ShapeDrawable extends Drawable {
         this.topRightRadius = topRightRadius;
         this.bottomLeftRadius = bottomLeftRadius;
         this.bottomRightRadius = bottomRightRadius;
-        this.width = width;
-        this.height = height;
         this.style = style;
+        mRect = new Rect();
+        mPaint = new Paint();
     }
 
     @Override
@@ -66,17 +72,20 @@ public class ShapeDrawable extends Drawable {
         }
     }
 
+    @Override
+    protected void onBoundsChange(Rect bounds) {
+        super.onBoundsChange(bounds);
+        mRect.set(bounds);
+    }
+
     /**
      * 画圆
      *
      * @param canvas
      */
     private void drawCircle(Canvas canvas) {
-        if (style == STROKE) {
-
-        } else {
-
-        }
+        initPaintStyle();
+        canvas.drawCircle(mRect.centerX(), mRect.centerY(), Math.min(mRect.width(), mRect.height()) / 2, mPaint);
     }
 
     /**
@@ -85,7 +94,8 @@ public class ShapeDrawable extends Drawable {
      * @param canvas
      */
     private void drawRectangle(Canvas canvas) {
-
+        initPaintStyle();
+        canvas.drawRect(mRect,mPaint);
     }
 
     /**
@@ -94,7 +104,12 @@ public class ShapeDrawable extends Drawable {
      * @param canvas
      */
     private void drawRoundRec(Canvas canvas) {
-
+        initPaintStyle();
+        if (mRectF==null){
+            mRectF = new RectF();
+        }
+        mRectF.set(mRect);
+        canvas.drawRoundRect(mRectF,topLeftRadius,topLeftRadius,mPaint);
     }
 
     /**
@@ -116,6 +131,14 @@ public class ShapeDrawable extends Drawable {
 
     }
 
+    private void initPaintStyle() {
+        if (style == STROKE) {
+            mPaint.setStyle(Paint.Style.STROKE);
+        } else {
+            mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        }
+    }
+
     /**
      * @deprecated
      */
@@ -129,7 +152,6 @@ public class ShapeDrawable extends Drawable {
         private int stokeColor, solidColor;//边框颜色和填充颜色
         private int strokeWidth;//边框宽度
         private int topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius;//矩形的圆角
-        private int width, height;//drawable的宽高
         private int style = FILL;
 
 
@@ -178,15 +200,6 @@ public class ShapeDrawable extends Drawable {
             return this;
         }
 
-        public Builder setWidth(int width) {
-            this.width = width;
-            return this;
-        }
-
-        public Builder setHeight(int height) {
-            this.height = height;
-            return this;
-        }
 
         public Builder setStyle(@Style int style) {
             this.style = style;
@@ -195,7 +208,7 @@ public class ShapeDrawable extends Drawable {
 
         public ShapeDrawable build() {
             return new ShapeDrawable(shape, stokeColor, solidColor, strokeWidth,
-                    topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius, width, height, style);
+                    topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius, style);
         }
     }
 
