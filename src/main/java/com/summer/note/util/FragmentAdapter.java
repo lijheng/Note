@@ -1,4 +1,4 @@
-package com.summer.myapplication;
+package com.summer.note.util;
 
 import android.view.ViewGroup;
 
