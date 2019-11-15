@@ -1,4 +1,4 @@
-package com.lsfb.comeauction.widget.webView;
+package com.summer.note.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
