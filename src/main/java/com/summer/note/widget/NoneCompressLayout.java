@@ -1,4 +1,4 @@
-package com.summer.myapplication.widget;
+package com.summer.note.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
