@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-import com.summer.myapplication.R;
+import com.summer.note.R;
+
 
 /**
  * CreateBy:lijheng at 2019/11/8

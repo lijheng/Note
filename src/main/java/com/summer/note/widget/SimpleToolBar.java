@@ -1,4 +1,4 @@
-package com.summer.myapplication.widget;
+package com.summer.note.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,8 +23,9 @@ import androidx.annotation.Px;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.summer.myapplication.DensityUtil;
-import com.summer.myapplication.R;
+
+import com.summer.note.R;
+import com.summer.note.util.DensityUtil;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

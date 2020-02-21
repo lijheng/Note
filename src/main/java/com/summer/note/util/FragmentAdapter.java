@@ -14,8 +14,10 @@ import java.util.List;
 
 /**
  * CreateBy:lijheng at 2019/10/30
- * describe:
+ * describe:用于{@link androidx.viewpager.widget.ViewPager}的通用适配器，
+ * 通过设置 {@link FragmentCreator} 防止内存泄露
  */
+@SuppressWarnings("unused")
 public class FragmentAdapter extends FragmentPagerAdapter {
     /**
      * Fragment构造器列表
@@ -63,6 +65,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     /**
      * 增加一项，没有标题的
+     *
      * @param creator Fragment构造器
      */
     public void add(@NonNull FragmentCreator creator) {
@@ -110,7 +113,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         } else {
             mSelectedFragment = null;
         }
-        if (mSelectedListener!=null){
+        if (mSelectedListener != null) {
             mSelectedListener.selected(mSelectedFragment);
         }
 
@@ -153,7 +156,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     /**
      * fragment选择监听
      */
-    public interface FragmentSelectedListener{
+    public interface FragmentSelectedListener {
 
         void selected(@Nullable Fragment fragment);
     }
