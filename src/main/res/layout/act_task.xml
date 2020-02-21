@@ -7,7 +7,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.summer.note.widget.SimpleToolBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:title_textColor="@color/colorWhite"
+            app:title="@string/app_name"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
