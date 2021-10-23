@@ -1,0 +1,7 @@
+//include ':preimage'
+include ':Note'//,':sinkiangstaff'
+rootProject.name='Note'
+//include ':designpattern'
+//include ':launchmode'
+//include ':designmodule'
+//include ':common'
