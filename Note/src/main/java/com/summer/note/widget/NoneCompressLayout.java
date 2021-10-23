@@ -24,6 +24,9 @@ public class NoneCompressLayout extends ViewGroup {
     private static final int TOP = 0x02;
     private static final int BOTTOM = 0x03;
 
+
+    private int gravity = CENTER_HORIZONTAL;
+
     public NoneCompressLayout(Context context) {
         super(context);
     }
@@ -78,17 +81,29 @@ public class NoneCompressLayout extends ViewGroup {
             View child = getChildAt(i);
             final int width = child.getMeasuredWidth();
             final int height = child.getMeasuredHeight();
-            final int offset = (layoutHeight - height) / 2;
+            final int offset = getOffset(layoutHeight, height);
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
             left += params.leftMargin;
             child.layout(left, offset, left + width, height + offset);
-            Log.d(TAG, "onLayout: child = " + child + " , l = " + left + ", t = " + (t + offset) + ", r = " + (r + width)+", b = " + (b-offset));
+            Log.d(TAG, "onLayout: child = " + child + " , l = " + left + ", t = " + (t + offset) + ", r = " + (r + width) + ", b = " + (b - offset));
             left += width + params.rightMargin;
         }
 
-        for (int i = 0 ; i<getChildCount(); i ++ ) {
+        for (int i = 0; i < getChildCount(); i++) {
             Log.d(TAG, "onLayout end: child = " + getChildAt(i) + ", height = " + getChildAt(i).getHeight());
         }
+    }
+
+    private int getOffset(int layoutHeight, int height) {
+        int offset;
+        if (gravity == CENTER_HORIZONTAL) {
+            offset = (layoutHeight - height)/2;
+        } else if (gravity == TOP) {
+            offset = 0;
+        } else {
+            offset = layoutHeight - height;
+        }
+        return offset;
     }
 
     @Override
