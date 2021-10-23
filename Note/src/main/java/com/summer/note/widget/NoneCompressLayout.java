@@ -28,15 +28,20 @@ public class NoneCompressLayout extends ViewGroup {
     private int gravity = CENTER_HORIZONTAL;
 
     public NoneCompressLayout(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public NoneCompressLayout(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public NoneCompressLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        if (attrs != null) {
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.NoneCompressLayout);
+            gravity = a.getInt(R.styleable.NoneCompressLayout_android_gravity, CENTER_HORIZONTAL);
+            a.recycle();
+        }
     }
 
     @Override
@@ -97,7 +102,7 @@ public class NoneCompressLayout extends ViewGroup {
     private int getOffset(int layoutHeight, int height) {
         int offset;
         if (gravity == CENTER_HORIZONTAL) {
-            offset = (layoutHeight - height)/2;
+            offset = (layoutHeight - height) / 2;
         } else if (gravity == TOP) {
             offset = 0;
         } else {
