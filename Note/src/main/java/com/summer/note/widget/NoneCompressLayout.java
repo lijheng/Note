@@ -90,12 +90,7 @@ public class NoneCompressLayout extends ViewGroup {
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
             left += params.leftMargin;
             child.layout(left, offset, left + width, height + offset);
-            Log.d(TAG, "onLayout: child = " + child + " , l = " + left + ", t = " + (t + offset) + ", r = " + (r + width) + ", b = " + (b - offset));
             left += width + params.rightMargin;
-        }
-
-        for (int i = 0; i < getChildCount(); i++) {
-            Log.d(TAG, "onLayout end: child = " + getChildAt(i) + ", height = " + getChildAt(i).getHeight());
         }
     }
 
